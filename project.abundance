@@ -6976,8 +6976,7 @@
         },
         {
           "name": "Sheet Height",
-          "ioValue": 1219,
-          "currentEquation": "1219"
+          "ioValue": 500
         },
         {
           "name": "Part Padding",
@@ -6985,10 +6984,136 @@
         },
         {
           "name": "Orientations",
-          "ioValue": 12
+          "ioValue": 4
         }
       ],
-      "placements": []
+      "placements": [
+        [
+          {
+            "id": 2,
+            "rotate": 270,
+            "translate": {
+              "x": 5.21999979019165,
+              "y": 94.2300033569336
+            }
+          },
+          {
+            "id": 3,
+            "rotate": 180,
+            "translate": {
+              "x": 164.22000122070312,
+              "y": 184.7100067138672
+            }
+          },
+          {
+            "id": 6,
+            "rotate": 180,
+            "translate": {
+              "x": 388.58001708984375,
+              "y": 262.07000732421875
+            }
+          },
+          {
+            "id": 10,
+            "rotate": 0,
+            "translate": {
+              "x": -574.780029296875,
+              "y": 272.0899963378906
+            }
+          },
+          {
+            "id": 4,
+            "rotate": 0,
+            "translate": {
+              "x": -154.77999877929688,
+              "y": 370.55999755859375
+            }
+          },
+          {
+            "id": 5,
+            "rotate": 0,
+            "translate": {
+              "x": -153.38999938964844,
+              "y": 137.9300079345703
+            }
+          },
+          {
+            "id": 0,
+            "rotate": 270,
+            "translate": {
+              "x": -20.259994506835938,
+              "y": 562.7999877929688
+            }
+          },
+          {
+            "id": 8,
+            "rotate": 0,
+            "translate": {
+              "x": -351.239990234375,
+              "y": 231.40000915527344
+            }
+          },
+          {
+            "id": 7,
+            "rotate": 180,
+            "translate": {
+              "x": 531.2000122070312,
+              "y": 129.0399932861328
+            }
+          },
+          {
+            "id": 9,
+            "rotate": 90,
+            "translate": {
+              "x": 182.52000427246094,
+              "y": -94.61001586914062
+            }
+          },
+          {
+            "id": 1,
+            "rotate": 270,
+            "translate": {
+              "x": 44.970001220703125,
+              "y": 590.02001953125
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "atomType": "Gcode",
+      "x": 0.749730312837109,
+      "y": 0.8036951501154734,
+      "uniqueID": "id-260813",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Tool Size",
+          "ioValue": 3.175
+        },
+        {
+          "name": "Passes",
+          "ioValue": 4
+        },
+        {
+          "name": "Speed",
+          "ioValue": 750
+        },
+        {
+          "name": "Cut Through",
+          "ioValue": 2
+        },
+        {
+          "name": "Part Name",
+          "ioValue": "Maslow_Core_Replacment_Cylinder_cutting_files",
+          "currentEquation": "Maslow_Core_Replacment_Cylinder_cutting_files"
+        }
+      ],
+      "partName": "Maslow_Core_Replacment_Cylinder_cutting_files",
+      "sortDirection": "Left"
     }
   ],
   "allConnectors": [
@@ -7076,6 +7201,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-260801",
       "ap2ID": "id-260806"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-260806",
+      "ap2ID": "id-260813"
     }
   ],
   "unitsKey": "MM",
