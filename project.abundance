@@ -6892,6 +6892,21 @@
       ],
       "tag": "ThickWood",
       "tagIndex": 0
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.42502696871628914,
+      "y": 0.6443418013856812,
+      "uniqueID": "id-259343",
+      "name": "Extract LowerRing",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tag": "LowerRing",
+      "tagIndex": 0
     }
   ],
   "allConnectors": [
@@ -6949,6 +6964,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-257629",
       "ap2ID": "id-259334"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-259331",
+      "ap2ID": "id-259343"
     },
     {
       "ap2Name": "geometry",
