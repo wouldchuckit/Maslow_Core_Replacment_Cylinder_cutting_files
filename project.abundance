@@ -6862,6 +6862,36 @@
         }
       ],
       "orientationsForHashed": "032877b8"
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.42125134843581447,
+      "y": 0.13163972286374134,
+      "uniqueID": "id-259337",
+      "name": "Extract ThinWood",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tag": "ThinWood",
+      "tagIndex": 0
+    },
+    {
+      "atomType": "ExtractTag",
+      "x": 0.42880258899676377,
+      "y": 0.3903002309468822,
+      "uniqueID": "id-259340",
+      "name": "Extract ThickWood",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "tag": "ThickWood",
+      "tagIndex": 0
     }
   ],
   "allConnectors": [
@@ -6919,6 +6949,16 @@
       "ap2Name": "geometry",
       "ap1ID": "id-257629",
       "ap2ID": "id-259334"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-259334",
+      "ap2ID": "id-259337"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-259334",
+      "ap2ID": "id-259340"
     }
   ],
   "unitsKey": "MM",
