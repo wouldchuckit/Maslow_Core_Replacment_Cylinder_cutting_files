@@ -180,6 +180,319 @@
       "tagIndex": 0
     },
     {
+      "atomType": "Move",
+      "x": 0.49352750809061485,
+      "y": 0.5404157043879907,
+      "uniqueID": "id-260795",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "xDist",
+          "ioValue": 0
+        },
+        {
+          "name": "yDist",
+          "ioValue": 100
+        },
+        {
+          "name": "zDist",
+          "ioValue": 0
+        }
+      ]
+    },
+    {
+      "atomType": "Assembly",
+      "x": 0.5269687162891047,
+      "y": 0.7875288683602771,
+      "uniqueID": "id-260801",
+      "ioValues": [
+        {
+          "name": "Shape 1",
+          "ioValue": null
+        },
+        {
+          "name": "Shape 2",
+          "ioValue": null
+        }
+      ]
+    },
+    {
+      "atomType": "CutLayout",
+      "x": 0.6461704422869471,
+      "y": 0.7990762124711317,
+      "uniqueID": "id-260806",
+      "name": "Cut Layout",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Sheet Width",
+          "ioValue": 1000
+        },
+        {
+          "name": "Sheet Height",
+          "ioValue": 500
+        },
+        {
+          "name": "Part Padding",
+          "ioValue": 10
+        },
+        {
+          "name": "Orientations",
+          "ioValue": 4
+        }
+      ],
+      "placements": [
+        [
+          {
+            "id": 2,
+            "rotate": 270,
+            "translate": {
+              "x": 5.21999979019165,
+              "y": 94.2300033569336
+            }
+          },
+          {
+            "id": 3,
+            "rotate": 180,
+            "translate": {
+              "x": 164.22000122070312,
+              "y": 184.7100067138672
+            }
+          },
+          {
+            "id": 6,
+            "rotate": 180,
+            "translate": {
+              "x": 388.58001708984375,
+              "y": 262.07000732421875
+            }
+          },
+          {
+            "id": 10,
+            "rotate": 0,
+            "translate": {
+              "x": -574.780029296875,
+              "y": 272.0899963378906
+            }
+          },
+          {
+            "id": 4,
+            "rotate": 0,
+            "translate": {
+              "x": -154.77999877929688,
+              "y": 370.55999755859375
+            }
+          },
+          {
+            "id": 5,
+            "rotate": 0,
+            "translate": {
+              "x": -153.38999938964844,
+              "y": 137.9300079345703
+            }
+          },
+          {
+            "id": 0,
+            "rotate": 270,
+            "translate": {
+              "x": -20.259994506835938,
+              "y": 562.7999877929688
+            }
+          },
+          {
+            "id": 8,
+            "rotate": 0,
+            "translate": {
+              "x": -351.239990234375,
+              "y": 231.40000915527344
+            }
+          },
+          {
+            "id": 7,
+            "rotate": 180,
+            "translate": {
+              "x": 531.2000122070312,
+              "y": 129.0399932861328
+            }
+          },
+          {
+            "id": 9,
+            "rotate": 90,
+            "translate": {
+              "x": 182.52000427246094,
+              "y": -94.61001586914062
+            }
+          },
+          {
+            "id": 1,
+            "rotate": 270,
+            "translate": {
+              "x": 44.970001220703125,
+              "y": 590.02001953125
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "atomType": "Gcode",
+      "x": 0.749730312837109,
+      "y": 0.8036951501154734,
+      "uniqueID": "id-260813",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Tool Size",
+          "ioValue": 3.175
+        },
+        {
+          "name": "Passes",
+          "ioValue": 4
+        },
+        {
+          "name": "Speed",
+          "ioValue": 750
+        },
+        {
+          "name": "Cut Through",
+          "ioValue": 2
+        },
+        {
+          "name": "Part Name",
+          "ioValue": "Maslow_Core_Replacment_Cylinder_cutting_files",
+          "currentEquation": "Maslow_Core_Replacment_Cylinder_cutting_files"
+        }
+      ],
+      "partName": "Maslow_Core_Replacment_Cylinder_cutting_files",
+      "sortDirection": "Left"
+    },
+    {
+      "atomType": "CutOrient",
+      "x": 0.4929881337648328,
+      "y": 0.19168591224018475,
+      "uniqueID": "id-260820",
+      "name": "Cut Orient",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "orientations": [
+        {
+          "downwardFaceIndex": 16
+        },
+        {
+          "downwardFaceIndex": 16
+        },
+        {
+          "downwardFaceIndex": 16
+        }
+      ],
+      "orientationsForHashed": "6e9b6740"
+    },
+    {
+      "atomType": "CutLayout",
+      "x": 0.5706580366774541,
+      "y": 0.2632794457274827,
+      "uniqueID": "id-260823",
+      "name": "Cut Layout",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Sheet Width",
+          "ioValue": 500
+        },
+        {
+          "name": "Sheet Height",
+          "ioValue": 200
+        },
+        {
+          "name": "Part Padding",
+          "ioValue": 10
+        },
+        {
+          "name": "Orientations",
+          "ioValue": 4
+        }
+      ],
+      "placements": [
+        [
+          {
+            "id": 0,
+            "rotate": 180,
+            "translate": {
+              "x": 54.22999954223633,
+              "y": 54.22999954223633
+            }
+          },
+          {
+            "id": 1,
+            "rotate": 180,
+            "translate": {
+              "x": 104.22999572753906,
+              "y": 113.69000244140625
+            }
+          },
+          {
+            "id": 2,
+            "rotate": 270,
+            "translate": {
+              "x": 5.230000019073486,
+              "y": 273.1499938964844
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "atomType": "Gcode",
+      "x": 0.6952535059331176,
+      "y": 0.24942263279445726,
+      "uniqueID": "id-260830",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Tool Size",
+          "ioValue": 3.175
+        },
+        {
+          "name": "Passes",
+          "ioValue": 1
+        },
+        {
+          "name": "Speed",
+          "ioValue": 700
+        },
+        {
+          "name": "Cut Through",
+          "ioValue": 2
+        },
+        {
+          "name": "Part Name",
+          "ioValue": "Maslow_Core_Replacment_Cylinder_cutting_files",
+          "currentEquation": "Maslow_Core_Replacment_Cylinder_cutting_files"
+        }
+      ],
+      "partName": "Maslow_Core_Replacment_Cylinder_cutting_files",
+      "sortDirection": "Left"
+    },
+    {
       "atomType": "GitHubMolecule",
       "x": 0.18878101402373246,
       "y": 0.6766743648960739,
@@ -6917,322 +7230,6 @@
       "unitsKey": "MM",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1784644099595
-    },
-    {
-      "atomType": "Move",
-      "x": 0.49352750809061485,
-      "y": 0.5404157043879907,
-      "uniqueID": "id-260795",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "xDist",
-          "ioValue": 0
-        },
-        {
-          "name": "yDist",
-          "ioValue": 100,
-          "currentEquation": "100"
-        },
-        {
-          "name": "zDist",
-          "ioValue": 0
-        }
-      ]
-    },
-    {
-      "atomType": "Assembly",
-      "x": 0.5269687162891047,
-      "y": 0.7875288683602771,
-      "uniqueID": "id-260801",
-      "ioValues": [
-        {
-          "name": "Shape 1",
-          "ioValue": null
-        },
-        {
-          "name": "Shape 2",
-          "ioValue": null
-        }
-      ]
-    },
-    {
-      "atomType": "CutLayout",
-      "x": 0.6461704422869471,
-      "y": 0.7990762124711317,
-      "uniqueID": "id-260806",
-      "name": "Cut Layout",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Sheet Width",
-          "ioValue": 1000
-        },
-        {
-          "name": "Sheet Height",
-          "ioValue": 500
-        },
-        {
-          "name": "Part Padding",
-          "ioValue": 10
-        },
-        {
-          "name": "Orientations",
-          "ioValue": 4
-        }
-      ],
-      "placements": [
-        [
-          {
-            "id": 2,
-            "rotate": 270,
-            "translate": {
-              "x": 5.21999979019165,
-              "y": 94.2300033569336
-            }
-          },
-          {
-            "id": 3,
-            "rotate": 180,
-            "translate": {
-              "x": 164.22000122070312,
-              "y": 184.7100067138672
-            }
-          },
-          {
-            "id": 6,
-            "rotate": 180,
-            "translate": {
-              "x": 388.58001708984375,
-              "y": 262.07000732421875
-            }
-          },
-          {
-            "id": 10,
-            "rotate": 0,
-            "translate": {
-              "x": -574.780029296875,
-              "y": 272.0899963378906
-            }
-          },
-          {
-            "id": 4,
-            "rotate": 0,
-            "translate": {
-              "x": -154.77999877929688,
-              "y": 370.55999755859375
-            }
-          },
-          {
-            "id": 5,
-            "rotate": 0,
-            "translate": {
-              "x": -153.38999938964844,
-              "y": 137.9300079345703
-            }
-          },
-          {
-            "id": 0,
-            "rotate": 270,
-            "translate": {
-              "x": -20.259994506835938,
-              "y": 562.7999877929688
-            }
-          },
-          {
-            "id": 8,
-            "rotate": 0,
-            "translate": {
-              "x": -351.239990234375,
-              "y": 231.40000915527344
-            }
-          },
-          {
-            "id": 7,
-            "rotate": 180,
-            "translate": {
-              "x": 531.2000122070312,
-              "y": 129.0399932861328
-            }
-          },
-          {
-            "id": 9,
-            "rotate": 90,
-            "translate": {
-              "x": 182.52000427246094,
-              "y": -94.61001586914062
-            }
-          },
-          {
-            "id": 1,
-            "rotate": 270,
-            "translate": {
-              "x": 44.970001220703125,
-              "y": 590.02001953125
-            }
-          }
-        ]
-      ]
-    },
-    {
-      "atomType": "Gcode",
-      "x": 0.749730312837109,
-      "y": 0.8036951501154734,
-      "uniqueID": "id-260813",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Tool Size",
-          "ioValue": 3.175
-        },
-        {
-          "name": "Passes",
-          "ioValue": 4
-        },
-        {
-          "name": "Speed",
-          "ioValue": 750
-        },
-        {
-          "name": "Cut Through",
-          "ioValue": 2
-        },
-        {
-          "name": "Part Name",
-          "ioValue": "Maslow_Core_Replacment_Cylinder_cutting_files",
-          "currentEquation": "Maslow_Core_Replacment_Cylinder_cutting_files"
-        }
-      ],
-      "partName": "Maslow_Core_Replacment_Cylinder_cutting_files",
-      "sortDirection": "Left"
-    },
-    {
-      "atomType": "CutOrient",
-      "x": 0.4929881337648328,
-      "y": 0.19168591224018475,
-      "uniqueID": "id-260820",
-      "name": "Cut Orient",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "orientations": [
-        {
-          "downwardFaceIndex": 16
-        },
-        {
-          "downwardFaceIndex": 16
-        },
-        {
-          "downwardFaceIndex": 16
-        }
-      ],
-      "orientationsForHashed": "6e9b6740"
-    },
-    {
-      "atomType": "CutLayout",
-      "x": 0.5706580366774541,
-      "y": 0.2632794457274827,
-      "uniqueID": "id-260823",
-      "name": "Cut Layout",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Sheet Width",
-          "ioValue": 500
-        },
-        {
-          "name": "Sheet Height",
-          "ioValue": 200
-        },
-        {
-          "name": "Part Padding",
-          "ioValue": 10
-        },
-        {
-          "name": "Orientations",
-          "ioValue": 4
-        }
-      ],
-      "placements": [
-        [
-          {
-            "id": 0,
-            "rotate": 180,
-            "translate": {
-              "x": 54.22999954223633,
-              "y": 54.22999954223633
-            }
-          },
-          {
-            "id": 1,
-            "rotate": 180,
-            "translate": {
-              "x": 104.22999572753906,
-              "y": 113.69000244140625
-            }
-          },
-          {
-            "id": 2,
-            "rotate": 270,
-            "translate": {
-              "x": 5.230000019073486,
-              "y": 273.1499938964844
-            }
-          }
-        ]
-      ]
-    },
-    {
-      "atomType": "Gcode",
-      "x": 0.6952535059331176,
-      "y": 0.24942263279445726,
-      "uniqueID": "id-260830",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Tool Size",
-          "ioValue": 3.175
-        },
-        {
-          "name": "Passes",
-          "ioValue": 1,
-          "currentEquation": "1"
-        },
-        {
-          "name": "Speed",
-          "ioValue": 700
-        },
-        {
-          "name": "Cut Through",
-          "ioValue": 2,
-          "currentEquation": "2"
-        },
-        {
-          "name": "Part Name",
-          "ioValue": "Maslow_Core_Replacment_Cylinder_cutting_files",
-          "currentEquation": "Maslow_Core_Replacment_Cylinder_cutting_files"
-        }
-      ],
-      "partName": "Maslow_Core_Replacment_Cylinder_cutting_files",
-      "sortDirection": "Left"
     }
   ],
   "allConnectors": [
@@ -7307,16 +7304,6 @@
       "ap2ID": "id-260795"
     },
     {
-      "ap2Name": "geometry",
-      "ap1ID": "id-258218",
-      "ap2ID": "id-259331"
-    },
-    {
-      "ap2Name": "geometry",
-      "ap1ID": "id-260311",
-      "ap2ID": "id-259334"
-    },
-    {
       "ap2Name": "Shape 1",
       "ap1ID": "id-260795",
       "ap2ID": "id-260801"
@@ -7340,6 +7327,16 @@
       "ap2Name": "geometry",
       "ap1ID": "id-260823",
       "ap2ID": "id-260830"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-258218",
+      "ap2ID": "id-259331"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-260311",
+      "ap2ID": "id-259334"
     }
   ],
   "unitsKey": "MM",
