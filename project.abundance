@@ -7114,6 +7114,88 @@
       ],
       "partName": "Maslow_Core_Replacment_Cylinder_cutting_files",
       "sortDirection": "Left"
+    },
+    {
+      "atomType": "CutOrient",
+      "x": 0.4929881337648328,
+      "y": 0.19168591224018475,
+      "uniqueID": "id-260820",
+      "name": "Cut Orient",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "orientations": [
+        {
+          "downwardFaceIndex": 16
+        },
+        {
+          "downwardFaceIndex": 16
+        },
+        {
+          "downwardFaceIndex": 16
+        }
+      ],
+      "orientationsForHashed": "6e9b6740"
+    },
+    {
+      "atomType": "CutLayout",
+      "x": 0.5706580366774541,
+      "y": 0.2632794457274827,
+      "uniqueID": "id-260823",
+      "name": "Cut Layout",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Sheet Width",
+          "ioValue": 500
+        },
+        {
+          "name": "Sheet Height",
+          "ioValue": 200
+        },
+        {
+          "name": "Part Padding",
+          "ioValue": 10
+        },
+        {
+          "name": "Orientations",
+          "ioValue": 4
+        }
+      ],
+      "placements": [
+        [
+          {
+            "id": 0,
+            "rotate": 180,
+            "translate": {
+              "x": 54.22999954223633,
+              "y": 54.22999954223633
+            }
+          },
+          {
+            "id": 1,
+            "rotate": 180,
+            "translate": {
+              "x": 104.22999572753906,
+              "y": 113.69000244140625
+            }
+          },
+          {
+            "id": 2,
+            "rotate": 270,
+            "translate": {
+              "x": 5.230000019073486,
+              "y": 273.1499938964844
+            }
+          }
+        ]
+      ]
     }
   ],
   "allConnectors": [
@@ -7179,6 +7261,11 @@
     },
     {
       "ap2Name": "geometry",
+      "ap1ID": "id-259337",
+      "ap2ID": "id-260820"
+    },
+    {
+      "ap2Name": "geometry",
       "ap1ID": "id-259340",
       "ap2ID": "id-260795"
     },
@@ -7206,6 +7293,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-260806",
       "ap2ID": "id-260813"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-260820",
+      "ap2ID": "id-260823"
     }
   ],
   "unitsKey": "MM",
