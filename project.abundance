@@ -7196,6 +7196,42 @@
           }
         ]
       ]
+    },
+    {
+      "atomType": "Gcode",
+      "x": 0.6666666666666666,
+      "y": 0.28868360277136257,
+      "uniqueID": "id-260830",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Tool Size",
+          "ioValue": 3.175
+        },
+        {
+          "name": "Passes",
+          "ioValue": 1,
+          "currentEquation": "1"
+        },
+        {
+          "name": "Speed",
+          "ioValue": 700
+        },
+        {
+          "name": "Cut Through",
+          "ioValue": 2
+        },
+        {
+          "name": "Part Name",
+          "ioValue": "Maslow_Core_Replacment_Cylinder_cutting_files",
+          "currentEquation": "Maslow_Core_Replacment_Cylinder_cutting_files"
+        }
+      ],
+      "partName": "Maslow_Core_Replacment_Cylinder_cutting_files",
+      "sortDirection": "Left"
     }
   ],
   "allConnectors": [
@@ -7298,6 +7334,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-260820",
       "ap2ID": "id-260823"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-260823",
+      "ap2ID": "id-260830"
     }
   ],
   "unitsKey": "MM",
