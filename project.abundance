@@ -7199,8 +7199,8 @@
     },
     {
       "atomType": "Gcode",
-      "x": 0.6666666666666666,
-      "y": 0.28868360277136257,
+      "x": 0.6952535059331176,
+      "y": 0.24942263279445726,
       "uniqueID": "id-260830",
       "ioValues": [
         {
@@ -7222,7 +7222,8 @@
         },
         {
           "name": "Cut Through",
-          "ioValue": 2
+          "ioValue": 2,
+          "currentEquation": "2"
         },
         {
           "name": "Part Name",
