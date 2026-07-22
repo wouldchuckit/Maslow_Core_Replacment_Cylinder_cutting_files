@@ -7260,6 +7260,231 @@
       "unitsKey": "MM",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1784644099595
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.7599784250269688,
+      "y": 0.5450346420323325,
+      "uniqueID": "id-261688",
+      "name": "Label_Bounding_Box",
+      "ioValues": [
+        {
+          "name": "Shape",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "Font_Size",
+          "ioValue": 34
+        },
+        {
+          "name": "Decimals",
+          "ioValue": 1
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-261679",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.45833333333333337,
+          "y": 0.33704735376044564,
+          "uniqueID": "id-261680",
+          "ioValues": [
+            {
+              "name": "input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "labelColor",
+              "ioValue": "#3A2F28",
+              "currentEquation": "#3A2F28"
+            },
+            {
+              "name": "fontSize",
+              "ioValue": 34
+            },
+            {
+              "name": "decimals",
+              "ioValue": 1
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "type Vec3 = [number, number, number];\n\ntype LabelPayload = {\n  type: \"Label\";\n  fontSize: number;\n  line: {\n    start: Vec3;\n    end: Vec3;\n    color: string;\n    linewidth: number;\n  };\n  endSegments: {\n    start: { p1: Vec3; p2: Vec3 };\n    end: { p1: Vec3; p2: Vec3 };\n    color: string;\n    linewidth: number;\n  };\n  text: {\n    value: string;\n    color: string;\n    position: Vec3;\n    scale: Vec3;\n    font: string;\n    linewidth: number;\n  };\n  movement: { x: number; y: number; z: number };\n  rotation: { x: number; y: number; z: number };\n};\n\nfunction run(\n  input: Assembly,\n  labelColor: string = \"#2C241F\",\n  fontSize: number = 1,\n  decimals: number = 2\n) {\n  if (!input) {\n    throw new Error(\"Connect a geometry Assembly to the input.\");\n  }\n\n  const leaves = collectLeaves(input);\n  if (leaves.length === 0) {\n    throw new Error(\"Input assembly has no leaf geometry.\");\n  }\n\n  let minX = Number.POSITIVE_INFINITY;\n  let minY = Number.POSITIVE_INFINITY;\n  let minZ = Number.POSITIVE_INFINITY;\n  let maxX = Number.NEGATIVE_INFINITY;\n  let maxY = Number.NEGATIVE_INFINITY;\n  let maxZ = Number.NEGATIVE_INFINITY;\n\n  let all2D = true;\n  let foundBounds = false;\n\n  for (const leaf of leaves) {\n    const geom: any = (leaf as any).geometry;\n    const bbox = geom && geom.boundingBox;\n    const bounds = bbox && bbox.bounds;\n\n    if (!bounds || !Array.isArray(bounds) || bounds.length < 2) {\n      continue;\n    }\n\n    const b0: any[] = bounds[0];\n    const b1: any[] = bounds[1];\n    if (!Array.isArray(b0) || !Array.isArray(b1) || b0.length < 2 || b1.length < 2) {\n      continue;\n    }\n\n    const lx = Number(b0[0]);\n    const ly = Number(b0[1]);\n    const lz = Number(b0.length > 2 ? b0[2] : 0);\n\n    const ux = Number(b1[0]);\n    const uy = Number(b1[1]);\n    const uz = Number(b1.length > 2 ? b1[2] : 0);\n\n    minX = Math.min(minX, lx);\n    minY = Math.min(minY, ly);\n    minZ = Math.min(minZ, lz);\n\n    maxX = Math.max(maxX, ux);\n    maxY = Math.max(maxY, uy);\n    maxZ = Math.max(maxZ, uz);\n\n    const leafIs2D =\n      typeof (leaf as any).is2D === \"function\" ? (leaf as any).is2D() : b0.length < 3;\n    if (!leafIs2D) all2D = false;\n\n    foundBounds = true;\n  }\n\n  if (!foundBounds) {\n    throw new Error(\"Could not read bounding boxes from the input geometry.\");\n  }\n\n  const dx = Math.max(0, maxX - minX);\n  const dy = Math.max(0, maxY - minY);\n  const dz = Math.max(0, maxZ - minZ);\n\n  const span = Math.max(dx, dy, dz, 1e-6);\n  const margin = span * 0.08;\n\n  // Uniform text scale for all axis labels so font appears consistent.\n  const textScaleX = span * 0.12 * fontSize;\n  const textScaleY = span * 0.06 * fontSize;\n\n  const labels: LabelPayload[] = [];\n\n  // X dimension (offset below)\n  labels.push(\n    makeLabel(\n      \"X: \" + fmt(dx, decimals),\n      [minX, minY - margin, minZ],\n      [maxX, minY - margin, minZ],\n      labelColor,\n      fontSize,\n      textScaleX,\n      textScaleY\n    )\n  );\n\n  // Y dimension (offset left)\n  labels.push(\n    makeLabel(\n      \"Y: \" + fmt(dy, decimals),\n      [minX - margin, minY, minZ],\n      [minX - margin, maxY, minZ],\n      labelColor,\n      fontSize,\n      textScaleX,\n      textScaleY\n    )\n  );\n\n  // Z dimension only for non-2D input\n  if (!all2D) {\n    labels.push(\n      makeLabel(\n        \"Z: \" + fmt(dz, decimals),\n        [maxX + margin, maxY + margin, minZ],\n        [maxX + margin, maxY + margin, maxZ],\n        labelColor,\n        fontSize,\n        textScaleX,\n        textScaleY\n      )\n    );\n  }\n\n  // Preserve source geometry and metadata, then append generated labels.\n  const out: any = new Assembly(input as any);\n  const prev = Array.isArray(out.nonReplicadSerialized)\n    ? out.nonReplicadSerialized\n    : out.nonReplicadSerialized\n      ? [out.nonReplicadSerialized]\n      : [];\n  out.nonReplicadSerialized = prev.concat(labels);\n\n  return out;\n}\n\nfunction collectLeaves(node: Assembly): Assembly[] {\n  if ((node as any).isLeaf && (node as any).isLeaf()) {\n    return [node];\n  }\n  const children: any[] = Array.isArray((node as any).geometry)\n    ? ((node as any).geometry as any[])\n    : [];\n  const out: Assembly[] = [];\n  for (const child of children) {\n    out.push(...collectLeaves(child as Assembly));\n  }\n  return out;\n}\n\nfunction fmt(v: number, decimals: number): string {\n  const d = Math.max(0, Math.min(6, Math.floor(decimals)));\n  const p = Math.pow(10, d);\n  const rounded = Math.round(v * p) / p;\n  return String(rounded);\n}\n\nfunction makeLabel(\n  text: string,\n  start: Vec3,\n  end: Vec3,\n  color: string,\n  fontSize: number,\n  textScaleX: number,\n  textScaleY: number\n): LabelPayload {\n  const lineDir = normalize(sub(end, start));\n\n  const ref: Vec3 = Math.abs(lineDir[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];\n  const segDir = normalize(cross(lineDir, ref));\n\n  let perp: Vec3 = normalize([-lineDir[1], lineDir[0], 0]);\n  if (length(perp) < 1e-9) perp = [0, 1, 0];\n\n  const lineLength = Math.max(length(sub(end, start)), 1e-6);\n  const endSegmentLength = Math.max(lineLength * 0.05, lineLength * 0.02);\n\n  const startP1 = sub(start, mul(segDir, endSegmentLength / 2));\n  const startP2 = add(start, mul(segDir, endSegmentLength / 2));\n  const endP1 = sub(end, mul(segDir, endSegmentLength / 2));\n  const endP2 = add(end, mul(segDir, endSegmentLength / 2));\n\n  const mid = mul(add(start, end), 0.5);\n  const offset = mul(perp, 2.5);\n  const textPos = add(mid, offset);\n\n  return {\n    type: \"Label\",\n    fontSize,\n    line: {\n      start,\n      end,\n      color,\n      linewidth: 5\n    },\n    endSegments: {\n      start: { p1: startP1, p2: startP2 },\n      end: { p1: endP1, p2: endP2 },\n      color,\n      linewidth: 5\n    },\n    text: {\n      value: text,\n      color,\n      position: textPos,\n      scale: [textScaleX, textScaleY, 1],\n      font: \"Bold \" + String(fontSize) + \"px Arial\",\n      linewidth: fontSize * 0.4\n    },\n    movement: { x: 0, y: 0, z: 0 },\n    rotation: { x: 0, y: 0, z: 0 }\n  };\n}\n\nfunction add(a: Vec3, b: Vec3): Vec3 {\n  return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];\n}\nfunction sub(a: Vec3, b: Vec3): Vec3 {\n  return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];\n}\nfunction mul(a: Vec3, s: number): Vec3 {\n  return [a[0] * s, a[1] * s, a[2] * s];\n}\nfunction cross(a: Vec3, b: Vec3): Vec3 {\n  return [\n    a[1] * b[2] - a[2] * b[1],\n    a[2] * b[0] - a[0] * b[2],\n    a[0] * b[1] - a[1] * b[0]\n  ];\n}\nfunction length(a: Vec3): number {\n  return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);\n}\nfunction normalize(a: Vec3): Vec3 {\n  const len = length(a);\n  if (len < 1e-12) return [0, 0, 0];\n  return [a[0] / len, a[1] / len, a[2] / len];\n}",
+          "compiledCode": "\"use strict\";\nfunction run(input, labelColor = \"#2C241F\", fontSize = 1, decimals = 2) {\n    if (!input) {\n        throw new Error(\"Connect a geometry Assembly to the input.\");\n    }\n    const leaves = collectLeaves(input);\n    if (leaves.length === 0) {\n        throw new Error(\"Input assembly has no leaf geometry.\");\n    }\n    let minX = Number.POSITIVE_INFINITY;\n    let minY = Number.POSITIVE_INFINITY;\n    let minZ = Number.POSITIVE_INFINITY;\n    let maxX = Number.NEGATIVE_INFINITY;\n    let maxY = Number.NEGATIVE_INFINITY;\n    let maxZ = Number.NEGATIVE_INFINITY;\n    let all2D = true;\n    let foundBounds = false;\n    for (const leaf of leaves) {\n        const geom = leaf.geometry;\n        const bbox = geom && geom.boundingBox;\n        const bounds = bbox && bbox.bounds;\n        if (!bounds || !Array.isArray(bounds) || bounds.length < 2) {\n            continue;\n        }\n        const b0 = bounds[0];\n        const b1 = bounds[1];\n        if (!Array.isArray(b0) || !Array.isArray(b1) || b0.length < 2 || b1.length < 2) {\n            continue;\n        }\n        const lx = Number(b0[0]);\n        const ly = Number(b0[1]);\n        const lz = Number(b0.length > 2 ? b0[2] : 0);\n        const ux = Number(b1[0]);\n        const uy = Number(b1[1]);\n        const uz = Number(b1.length > 2 ? b1[2] : 0);\n        minX = Math.min(minX, lx);\n        minY = Math.min(minY, ly);\n        minZ = Math.min(minZ, lz);\n        maxX = Math.max(maxX, ux);\n        maxY = Math.max(maxY, uy);\n        maxZ = Math.max(maxZ, uz);\n        const leafIs2D = typeof leaf.is2D === \"function\" ? leaf.is2D() : b0.length < 3;\n        if (!leafIs2D)\n            all2D = false;\n        foundBounds = true;\n    }\n    if (!foundBounds) {\n        throw new Error(\"Could not read bounding boxes from the input geometry.\");\n    }\n    const dx = Math.max(0, maxX - minX);\n    const dy = Math.max(0, maxY - minY);\n    const dz = Math.max(0, maxZ - minZ);\n    const span = Math.max(dx, dy, dz, 1e-6);\n    const margin = span * 0.08;\n    // Uniform text scale for all axis labels so font appears consistent.\n    const textScaleX = span * 0.12 * fontSize;\n    const textScaleY = span * 0.06 * fontSize;\n    const labels = [];\n    // X dimension (offset below)\n    labels.push(makeLabel(\"X: \" + fmt(dx, decimals), [minX, minY - margin, minZ], [maxX, minY - margin, minZ], labelColor, fontSize, textScaleX, textScaleY));\n    // Y dimension (offset left)\n    labels.push(makeLabel(\"Y: \" + fmt(dy, decimals), [minX - margin, minY, minZ], [minX - margin, maxY, minZ], labelColor, fontSize, textScaleX, textScaleY));\n    // Z dimension only for non-2D input\n    if (!all2D) {\n        labels.push(makeLabel(\"Z: \" + fmt(dz, decimals), [maxX + margin, maxY + margin, minZ], [maxX + margin, maxY + margin, maxZ], labelColor, fontSize, textScaleX, textScaleY));\n    }\n    // Preserve source geometry and metadata, then append generated labels.\n    const out = new Assembly(input);\n    const prev = Array.isArray(out.nonReplicadSerialized)\n        ? out.nonReplicadSerialized\n        : out.nonReplicadSerialized\n            ? [out.nonReplicadSerialized]\n            : [];\n    out.nonReplicadSerialized = prev.concat(labels);\n    return out;\n}\nfunction collectLeaves(node) {\n    if (node.isLeaf && node.isLeaf()) {\n        return [node];\n    }\n    const children = Array.isArray(node.geometry)\n        ? node.geometry\n        : [];\n    const out = [];\n    for (const child of children) {\n        out.push(...collectLeaves(child));\n    }\n    return out;\n}\nfunction fmt(v, decimals) {\n    const d = Math.max(0, Math.min(6, Math.floor(decimals)));\n    const p = Math.pow(10, d);\n    const rounded = Math.round(v * p) / p;\n    return String(rounded);\n}\nfunction makeLabel(text, start, end, color, fontSize, textScaleX, textScaleY) {\n    const lineDir = normalize(sub(end, start));\n    const ref = Math.abs(lineDir[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];\n    const segDir = normalize(cross(lineDir, ref));\n    let perp = normalize([-lineDir[1], lineDir[0], 0]);\n    if (length(perp) < 1e-9)\n        perp = [0, 1, 0];\n    const lineLength = Math.max(length(sub(end, start)), 1e-6);\n    const endSegmentLength = Math.max(lineLength * 0.05, lineLength * 0.02);\n    const startP1 = sub(start, mul(segDir, endSegmentLength / 2));\n    const startP2 = add(start, mul(segDir, endSegmentLength / 2));\n    const endP1 = sub(end, mul(segDir, endSegmentLength / 2));\n    const endP2 = add(end, mul(segDir, endSegmentLength / 2));\n    const mid = mul(add(start, end), 0.5);\n    const offset = mul(perp, 2.5);\n    const textPos = add(mid, offset);\n    return {\n        type: \"Label\",\n        fontSize,\n        line: {\n            start,\n            end,\n            color,\n            linewidth: 5\n        },\n        endSegments: {\n            start: { p1: startP1, p2: startP2 },\n            end: { p1: endP1, p2: endP2 },\n            color,\n            linewidth: 5\n        },\n        text: {\n            value: text,\n            color,\n            position: textPos,\n            scale: [textScaleX, textScaleY, 1],\n            font: \"Bold \" + String(fontSize) + \"px Arial\",\n            linewidth: fontSize * 0.4\n        },\n        movement: { x: 0, y: 0, z: 0 },\n        rotation: { x: 0, y: 0, z: 0 }\n    };\n}\nfunction add(a, b) {\n    return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];\n}\nfunction sub(a, b) {\n    return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];\n}\nfunction mul(a, s) {\n    return [a[0] * s, a[1] * s, a[2] * s];\n}\nfunction cross(a, b) {\n    return [\n        a[1] * b[2] - a[2] * b[1],\n        a[2] * b[0] - a[0] * b[2],\n        a[0] * b[1] - a[1] * b[0]\n    ];\n}\nfunction length(a) {\n    return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);\n}\nfunction normalize(a) {\n    const len = length(a);\n    if (len < 1e-12)\n        return [0, 0, 0];\n    return [a[0] / len, a[1] / len, a[2] / len];\n}\n"
+        },
+        {
+          "atomType": "Circle",
+          "x": 0.14219576719576718,
+          "y": 0.8523676880222841,
+          "uniqueID": "id-261681",
+          "ioValues": [
+            {
+              "name": "diameter",
+              "ioValue": 10
+            }
+          ]
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.2804232804232804,
+          "y": 0.8440111420612814,
+          "uniqueID": "id-261682",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": 50
+            }
+          ]
+        },
+        {
+          "atomType": "Move",
+          "x": 0.3697089947089947,
+          "y": 0.713091922005571,
+          "uniqueID": "id-261683",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": 10
+            }
+          ]
+        },
+        {
+          "atomType": "Rotate",
+          "x": 0.576058201058201,
+          "y": 0.6991643454038997,
+          "uniqueID": "id-261684",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "x-axis degrees",
+              "ioValue": 10
+            },
+            {
+              "name": "y-axis degrees",
+              "ioValue": 30
+            },
+            {
+              "name": "z-axis degrees",
+              "ioValue": 0
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0165,
+          "y": 0.1,
+          "uniqueID": "id-261685",
+          "name": "Shape",
+          "type": "geometry"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0165,
+          "y": 0.16,
+          "uniqueID": "id-261686",
+          "name": "Font_Size"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0165,
+          "y": 0.22,
+          "uniqueID": "id-261687",
+          "name": "Decimals"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-261680",
+          "ap2ID": "id-261679"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-261681",
+          "ap2ID": "id-261682"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-261682",
+          "ap2ID": "id-261683"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-261683",
+          "ap2ID": "id-261684"
+        },
+        {
+          "ap2Name": "input",
+          "ap1ID": "id-261685",
+          "ap2ID": "id-261680"
+        },
+        {
+          "ap2Name": "fontSize",
+          "ap1ID": "id-261686",
+          "ap2ID": "id-261680"
+        },
+        {
+          "ap2Name": "decimals",
+          "ap1ID": "id-261687",
+          "ap2ID": "id-261680"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-07-22T02:23:38.958Z",
+        "privateRepo": false,
+        "repoName": "Label_Bounding_Box",
+        "dateCreated": "2026-07-15T16:37:50Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-872",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/BarbourSmith/Label_Bounding_Box",
+        "topics": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739812",
+        "ranking": 2.4,
+        "searchField": "label_bounding_box barboursmith adds labels to show an input geometrie's bounding box ",
+        "owner": "BarbourSmith",
+        "description": "Adds labels to show an input geometrie's bounding Box",
+        "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Label_Bounding_Box/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1784689534819
     }
   ],
   "allConnectors": [
@@ -7357,6 +7582,11 @@
       "ap2Name": "geometry",
       "ap1ID": "id-260823",
       "ap2ID": "id-260830"
+    },
+    {
+      "ap2Name": "Shape",
+      "ap1ID": "id-260823",
+      "ap2ID": "id-261688"
     },
     {
       "ap2Name": "geometry",
