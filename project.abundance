@@ -7260,23 +7260,6 @@
       "unitsKey": "MM",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1784644099595
-    },
-    {
-      "atomType": "ExtractTag",
-      "x": 0.42071197411003236,
-      "y": 0.2956120092378753,
-      "uniqueID": "id-261671",
-      "name": "Extract Tag",
-      "ioValues": [
-        {
-          "name": "geometry",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "tagIndex": 0,
-      "selectedTags": [],
-      "includeUntagged": false,
-      "notKeepOut": false
     }
   ],
   "allConnectors": [
@@ -7339,11 +7322,6 @@
       "ap2Name": "geometry",
       "ap1ID": "id-259334",
       "ap2ID": "id-259340"
-    },
-    {
-      "ap2Name": "geometry",
-      "ap1ID": "id-259334",
-      "ap2ID": "id-261671"
     },
     {
       "ap2Name": "geometry",
