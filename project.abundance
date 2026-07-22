@@ -120,8 +120,8 @@
     },
     {
       "atomType": "CutOrient",
-      "x": 0.3274002157497303,
-      "y": 0.2817551963048499,
+      "x": 0.33225458468176916,
+      "y": 0.3695150115473441,
       "uniqueID": "id-259334",
       "name": "Cut Orient",
       "ioValues": [
@@ -162,7 +162,12 @@
         }
       ],
       "tag": "ThinWood",
-      "tagIndex": 0
+      "tagIndex": 0,
+      "selectedTags": [
+        "ThinWood"
+      ],
+      "includeUntagged": false,
+      "notKeepOut": false
     },
     {
       "atomType": "ExtractTag",
@@ -177,7 +182,12 @@
         }
       ],
       "tag": "ThickWood",
-      "tagIndex": 0
+      "tagIndex": 0,
+      "selectedTags": [
+        "ThickWood"
+      ],
+      "includeUntagged": false,
+      "notKeepOut": false
     },
     {
       "atomType": "Move",
@@ -3039,7 +3049,12 @@
             }
           ],
           "tag": "LowerClampRing",
-          "tagIndex": 0
+          "tagIndex": 0,
+          "selectedTags": [
+            "LowerClampRing"
+          ],
+          "includeUntagged": false,
+          "notKeepOut": false
         },
         {
           "atomType": "ExtractTag",
@@ -3054,7 +3069,12 @@
             }
           ],
           "tag": "LowerRing",
-          "tagIndex": 0
+          "tagIndex": 0,
+          "selectedTags": [
+            "LowerRing"
+          ],
+          "includeUntagged": false,
+          "notKeepOut": false
         },
         {
           "atomType": "Input",
@@ -4277,7 +4297,12 @@
             }
           ],
           "tag": "ThinWood",
-          "tagIndex": 0
+          "tagIndex": 0,
+          "selectedTags": [
+            "ThinWood"
+          ],
+          "includeUntagged": false,
+          "notKeepOut": false
         },
         {
           "atomType": "ExtractTag",
@@ -4292,7 +4317,12 @@
             }
           ],
           "tag": "ThickWood",
-          "tagIndex": 0
+          "tagIndex": 0,
+          "selectedTags": [
+            "ThickWood"
+          ],
+          "includeUntagged": false,
+          "notKeepOut": false
         },
         {
           "atomType": "GitHubMolecule",
