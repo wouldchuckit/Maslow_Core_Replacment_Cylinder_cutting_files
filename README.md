@@ -2,7 +2,7 @@
 
 # Maslow_Core_Replacment_Cylinder_cutting_files
 
-![](/project.svg)
+![](/project.png)
 
 ## Inputs
 
